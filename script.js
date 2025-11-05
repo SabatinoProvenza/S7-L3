@@ -8,7 +8,7 @@ const mostraCarrello = function () {
 
   carrello.forEach((libro, index) => {
     const li = document.createElement("li")
-    li.innerText = libro.title
+
     li.classList.add(
       "list-group-item",
       "d-flex",
@@ -17,8 +17,6 @@ const mostraCarrello = function () {
     )
     li.innerHTML = `
       ${libro.title}
-      $
-      ${libro.price}
       <button class="btn btn-sm btn-danger rimuovi-btn">X</button>
     `
     shop.appendChild(li)
