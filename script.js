@@ -6,11 +6,34 @@ const mostraCarrello = function () {
   const shop = document.getElementById("shop")
   shop.innerHTML = ""
 
-  carrello.forEach((libro) => {
+  carrello.forEach((libro, index) => {
     const li = document.createElement("li")
     li.innerText = libro.title
-    li.classList.add("list-group-item")
+    li.classList.add(
+      "list-group-item",
+      "d-flex",
+      "justify-content-between",
+      "align-items-center"
+    )
+    li.innerHTML = `
+      ${libro.title}
+      $
+      ${libro.price}
+      <button class="btn btn-sm btn-danger rimuovi-btn">X</button>
+    `
     shop.appendChild(li)
+    //  Event listener al bottone rimuovi
+    const btnRimuovi = li.querySelector(".rimuovi-btn")
+    btnRimuovi.addEventListener("click", function () {
+      // rimuove il libro giusto dall'array
+      carrello.splice(index, 1)
+
+      // aggiorna il localStorage
+      localStorage.setItem("carrello", JSON.stringify(carrello))
+
+      // aggiorna la UI
+      mostraCarrello()
+    })
   })
 }
 
